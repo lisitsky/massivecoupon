@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import widgets
 from massivecoupon.engine import models as enginemodels
-from massivecoupon.libs import formutils
+#from massivecoupon.libs import formutils
 from datetime import date
 import re
 import pdb
