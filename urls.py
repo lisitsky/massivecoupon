@@ -42,7 +42,8 @@ urlpatterns = patterns('',
 
     # Static stuff (apache should serve this in production)
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.PATH_MEDIA}),
-    (r'^(robots.txt)$', 'django.views.static.serve', {'document_root': '/var/www/massivecoupon/'}),
+    (r'^(robots.txt)$', 'django.views.static.serve', {'document_root': settings.PATH_MEDIA}),
+    #(r'^(robots.txt)$', 'django.views.static.serve', {'document_root': '/var/www/massivecoupon/'}),
 
 )
 
