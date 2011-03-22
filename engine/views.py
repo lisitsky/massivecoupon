@@ -59,11 +59,9 @@ def user_signup(request):
                 'cities' : cities,
               }, context_instance=RequestContext( request ) )
 
-
 def user_logout(request):
   logout(request)
   return HttpResponseRedirect('/')
-
 
 def user_login(request):
   cities = City.objects.all()
@@ -87,10 +85,6 @@ def user_login(request):
                 'form' : form,
                 'cities' : cities,
               }, context_instance=RequestContext( request ) )
-
-
-
-
 
 def terms(request):
   cities = City.objects.all()
@@ -116,14 +110,11 @@ def aboutus(request):
                   'cities' : cities,
               }, context_instance=RequestContext( request ) )
 
-
 def contactus(request):
   cities = City.objects.all()
   return render_to_response('contactus.html', {
                   'cities' : cities,
               }, context_instance=RequestContext( request ) )
-
-
 
 def city_subscribe(request, city_slug):
   try:
@@ -162,7 +153,6 @@ def city_subscribe(request, city_slug):
                 'cities' : cities,
               }, context_instance=RequestContext( request ) )
 
-
 @login_required
 def profile(request):
   cities = City.objects.all()
@@ -181,12 +171,9 @@ def index(request):
   else:
     return HttpResponseRedirect('/deals/groupon-clone/' )
 
-
 #  return render_to_response('index.html', {
 #             #   'now' : now,
 #              }, context_instance=RequestContext( request ) )
-
-
 
 def deal_checkout_complete(request, slug, quantity):
 
@@ -247,7 +234,6 @@ def deal_checkout_complete(request, slug, quantity):
 
   else:
     return Http404()
-
 
 def deal_checkout(request, slug):
 
@@ -362,5 +348,3 @@ def deal_detail(request, slug=None):
                 'countdown_time' : countdown_time,
                 'cities' : cities,
               }, context_instance=RequestContext( request ) )
-
-
