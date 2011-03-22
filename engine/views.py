@@ -120,7 +120,7 @@ def city_subscribe(request, city_slug):
   try:
     city = City.objects.get(slug=city_slug)
   except:
-    return HttpResponseRedirect('/deals/groupon-clone/')
+    return HttpResponseRedirect('/deals/new-york/')
 
 
   if request.method == 'POST': # If the form has been submitted...
@@ -167,9 +167,9 @@ def index(request):
     user_msg = None
 
   if user_msg:
-    return HttpResponseRedirect('/deals/groupon-clone/?user_msg=' + user_msg )
+    return HttpResponseRedirect('/deals/new-york/?user_msg=' + user_msg )
   else:
-    return HttpResponseRedirect('/deals/groupon-clone/' )
+    return HttpResponseRedirect('/deals/new-york/' )
 
 #  return render_to_response('index.html', {
 #             #   'now' : now,
@@ -228,7 +228,7 @@ def deal_checkout_complete(request, slug, quantity):
 
 
       user_msg = 'Thanks for purchasing a Massive Coupon! It will arrive in your profile within 24 hours'
-      return HttpResponseRedirect('/deals/groupon-clone/?user_msg=' + user_msg )
+      return HttpResponseRedirect('/deals/new-york/?user_msg=' + user_msg )
     else:
       return Http404()
 
@@ -322,17 +322,21 @@ def deal_checkout(request, slug):
                 'cities' : cities,
               }, context_instance=RequestContext( request ) )
 
-def deal_detail(request, slug=None):
+def deal_detail(request, slug=None, city_slug=None):
 
   try:
     user_msg = request.GET.get('user_msg', None)
   except:
     user_msg = None
 
-  if slug == None:
-    deal = Deal.objects.all()[0]
-  else:
+  if slug != None:
     deal = Deal.objects.get(slug=slug)
+  elif city_slug != None:
+    city = City.objects.get(slug=city_slug)
+    deal = Deal.objects.get(city=city.id)
+  else:
+    deal = Deal.objects.all()[0]
+
 
   if not deal.is_expired(): 
     countdown_time = deal.date_published.strftime("%Y,%m,%d") #+ ' 11:59 PM'

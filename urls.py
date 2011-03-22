@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^$', 'massivecoupon.engine.views.index', name='index'),
 
     url(r'^(?P<city_slug>\S+)/subscribe/$', 'massivecoupon.engine.views.city_subscribe', name='city_subscribe'),
+    url(r'^deals/(?P<city_slug>\S+)/$', 'massivecoupon.engine.views.deal_detail', name='deal_detail'),
 
 
     url(r'^terms-and-conditions/$', 'massivecoupon.engine.views.terms', name='terms'),
