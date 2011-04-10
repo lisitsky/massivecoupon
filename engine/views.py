@@ -9,11 +9,13 @@ from django.http import HttpResponseRedirect, HttpResponse,Http404
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
+#from django.contrib.gis.utils.geoip import GeoIP
 from engine.forms import *
 from engine.models import *
 import math
 import pdb
 import uuid
+import pygeoip
 
 from paypalxpress.driver import PayPal
 from paypalxpress.models import PayPalResponse
@@ -332,8 +334,17 @@ def deal_detail(request, slug=None, city_slug=None):
   if slug != None:
     deal = Deal.objects.get(slug=slug)
   elif city_slug != None:
-    city = City.objects.get(slug=city_slug)
-    deal = Deal.objects.get(city=city.id)
+    try:
+      city = City.objects.get(slug=city_slug)
+      deal = Deal.objects.get(city=city.id)
+    except:
+      deal = Deal.objects.all()[0]
+      gi = pygeoip.GeoIP('/var/geoip/GeoLiteCity.dat')
+      ip = request.META['REMOTE_ADDR']
+      geodata = gi.record_by_addr(ip)
+      city = City()
+      city.name = geodata['city']
+      deal.city = city
   else:
     deal = Deal.objects.all()[0]
 
