@@ -60,6 +60,7 @@
 
   <div class="city-slider" style="display: none; overflow:hidden;">
    <ul>
+       <li><a href="/deals/nearby">Nearby</a></li>
      {% for city in cities %}
        <li><a href="{% if city.is_active %}/deals/{{ city.slug }}/{% else %}/{{ city.slug }}/subscribe/{% endif %}">{{ city.name  }}</a></li>
      {% endfor %}

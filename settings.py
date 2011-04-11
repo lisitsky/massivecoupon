@@ -1,7 +1,7 @@
 # Django settings for massivecoupon project.
 import socket, os
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 
@@ -25,14 +25,14 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'postgresql_psycopg2'       # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = ''          # Or path to database file if using sqlite3.
+DATABASE_ENGINE = 'sqlite3' #postgresql_psycopg2'       # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+DATABASE_NAME = '/home/ec2-user/djangostack-1.2.5-0/projects/massivecoupon/data'          # Or path to database file if using sqlite3.
 DATABASE_USER = ''                    # Not used with sqlite3.
 DATABASE_PASSWORD = ''                  # Not used with sqlite3.
 DATABASE_HOST = 'localhost'                   # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''                            # Set to empty string for default. Not used with sqlite3.
 
-SESSION_COOKIE_DOMAIN = '.massivecoupon.com'
+SESSION_COOKIE_DOMAIN = '.javiervegas.eu'
 
 GOOGLE_MAPS_API_KEY = ''
 

@@ -9,11 +9,13 @@ from django.http import HttpResponseRedirect, HttpResponse,Http404
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
+#from django.contrib.gis.utils.geoip import GeoIP
 from engine.forms import *
 from engine.models import *
 import math
 import pdb
 import uuid
+import pygeoip
 
 from paypalxpress.driver import PayPal
 from paypalxpress.models import PayPalResponse
@@ -120,7 +122,7 @@ def city_subscribe(request, city_slug):
   try:
     city = City.objects.get(slug=city_slug)
   except:
-    return HttpResponseRedirect('/deals/new-york/')
+    return HttpResponseRedirect('/deals/nearby/')
 
 
   if request.method == 'POST': # If the form has been submitted...
@@ -166,10 +168,11 @@ def index(request):
   except:
     user_msg = None
 
+
   if user_msg:
-    return HttpResponseRedirect('/deals/new-york/?user_msg=' + user_msg )
+    return HttpResponseRedirect('/deals/nearby/?user_msg=' + user_msg )
   else:
-    return HttpResponseRedirect('/deals/new-york/' )
+    return HttpResponseRedirect('/deals/nearby/' )
 
 #  return render_to_response('index.html', {
 #             #   'now' : now,
@@ -228,7 +231,7 @@ def deal_checkout_complete(request, slug, quantity):
 
 
       user_msg = 'Thanks for purchasing a Massive Coupon! It will arrive in your profile within 24 hours'
-      return HttpResponseRedirect('/deals/new-york/?user_msg=' + user_msg )
+      return HttpResponseRedirect('/deals/nearby/?user_msg=' + user_msg )
     else:
       return Http404()
 
@@ -331,6 +334,14 @@ def deal_detail(request, slug=None, city_slug=None):
 
   if slug != None:
     deal = Deal.objects.get(slug=slug)
+  elif city_slug == 'nearby':
+    deal = Deal.objects.all()[0]
+    gi = pygeoip.GeoIP('/var/geoip/GeoLiteCity.dat')
+    ip = request.META['REMOTE_ADDR']
+    geodata = gi.record_by_addr(ip)
+    city = City()
+    city.name = geodata['city']
+    deal.city = city
   elif city_slug != None:
     city = City.objects.get(slug=city_slug)
     deal = Deal.objects.get(city=city.id)
