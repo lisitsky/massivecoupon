@@ -8,8 +8,8 @@ urlpatterns = patterns('',
     # Index page
     url(r'^$', 'massivecoupon.engine.views.index', name='index'),
 
-    url(r'^(?P<city_slug>\S+)/subscribe/$', 'massivecoupon.engine.views.city_subscribe', name='city_subscribe'),
-    url(r'^deals/(?P<city_slug>\S+)/$', 'massivecoupon.engine.views.deal_detail', name='deal_detail'),
+    url(r'^(?P<city_slug>[\w-]+)/subscribe/$', 'massivecoupon.engine.views.city_subscribe', name='city_subscribe'),
+    url(r'^deals/(?P<city_slug>[\w-]+)/$', 'massivecoupon.engine.views.deal_detail', name='deal_detail'),
 
 
     url(r'^terms-and-conditions/$', 'massivecoupon.engine.views.terms', name='terms'),
@@ -18,11 +18,11 @@ urlpatterns = patterns('',
     url(r'^about-us/$', 'massivecoupon.engine.views.aboutus', name='aboutus'),
     url(r'^contact-us/$', 'massivecoupon.engine.views.contactus', name='contactus'),
 
-    url(r'^deals/(?P<slug>\S+)/(?P<quantity>\d+)/checkout/complete/$', 'massivecoupon.engine.views.deal_checkout_complete', name='deal_checkout_complete'),
+    url(r'^deals/(?P<slug>[\w-]+)/(?P<quantity>\d+)/checkout/complete/$', 'massivecoupon.engine.views.deal_checkout_complete', name='deal_checkout_complete'),
 
-    url(r'^deals/groupon-clone/(?P<slug>\S+)/checkout/$', 'massivecoupon.engine.views.deal_checkout', name='deal_checkout'),
+    url(r'^deals/groupon-clone/(?P<slug>[\w-]+)/checkout/$', 'massivecoupon.engine.views.deal_checkout', name='deal_checkout'),
 
-    url(r'^deals/groupon-clone/(?P<slug>\S+)/$', 'massivecoupon.engine.views.deal_detail', name='deal_detail'),
+    url(r'^deals/groupon-clone/(?P<slug>[\w-]+)/$', 'massivecoupon.engine.views.deal_detail', name='deal_detail'),
 
     url(r'^deals/groupon-clone/$', 'massivecoupon.engine.views.deal_detail', name='deal_detail'),
 
