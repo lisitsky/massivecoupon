@@ -343,7 +343,8 @@ def deal_detail(request, slug=None, city_slug=None):
       city = City()
       city.name = geodata['city']
       deal.city = city
-    except:
+    except Exception, e:
+      print e
   elif city_slug != None:
     city = City.objects.get(slug=city_slug)
     deal = Deal.objects.get(city=city.id)
