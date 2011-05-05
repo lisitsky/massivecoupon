@@ -96,7 +96,7 @@ class Advertiser(models.Model):
   contact    = models.CharField(max_length=50, blank=True, help_text="Advertising contact")
   email      = models.EmailField(blank=True, help_text="Email address of contact")
 
-  def __str__(self):
+  def __unicode__(self):
     return self.name
 
   class Admin:
