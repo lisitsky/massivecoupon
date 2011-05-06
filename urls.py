@@ -133,3 +133,9 @@ urlpatterns = urlpatterns + patterns('',
     url('^openid/redirect/$', 'socialregistration.views.openid_redirect', name='openid_redirect'),
     url('^openid/callback/$', 'socialregistration.views.openid_callback', name='openid_callback')
 )
+
+# robokassa urls
+if getattr(settings, 'ROBOKASSA_ENABLED', None):
+    urlpatterns = urlpatterns + patterns('',
+        url(r'^robokassa/', include('robokassa.urls')),
+    )

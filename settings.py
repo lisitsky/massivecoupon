@@ -82,6 +82,18 @@ PAYPAL_PASSWORD = ""
 PAYPAL_SIGNATURE = ""
 PAYPAL_DEBUG = True
 
+# robokassa
+ROBOKASSA_ENABLED = True
+# see here details at http://pypi.python.org/pypi/django-robokassa/
+ROBOKASSA_LOGIN = ""  # robokassa login
+ROBOKASSA_PASSWORD1 = "" # password #1
+# optional
+ROBOKASSA_PASSWORD2 = "" # password #2 for automatical work with payments
+ROBOKASSA_USE_POST = True
+ROBOKASSA_STRICT_CHECK = True
+ROBOKASSA_TEST_MODE = True
+ROBOKASSA_EXTRA_PARAMS = []
+
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -141,6 +153,7 @@ INSTALLED_APPS = (
     'massivecoupon.socialregistration', 
     'massivecoupon.paypalxpress',
 #    'debug_toolbar',    
+    'robokassa',
 )
 
 LOGIN_URL = "/user/login/"
